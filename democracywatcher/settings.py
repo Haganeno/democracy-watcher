@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-y#rg4eq@o2a%+huacgs-i-q8*%vz1n%h4%#f-yvxzh+2%0y5!i
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'democracywatcher.apps.tracker'
 ]
 
 MIDDLEWARE = [
@@ -80,12 +81,14 @@ WSGI_APPLICATION = 'democracywatcher.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "OPTIONS": {
+            "service": "democracywatcher",
+            "passfile": ".my_pgpass",
+        },
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
