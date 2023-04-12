@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-y#rg4eq@o2a%+huacgs-i-q8*%vz1n%h4%#f-yvxzh+2%0y5!i
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'democracywatcher.apps.tracker'
+    'democracywatcher.apps.tracker',
+    'django_extensions'
 ]
 
 MIDDLEWARE = [

@@ -1,6 +1,7 @@
 from django.db import models
 
 class Deputy(models.Model):
+    id = models.IntegerField(primary_key=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     slug = models.CharField(unique=True)
@@ -33,6 +34,7 @@ class Deputy(models.Model):
 
 
 class Ballot(models.Model):
+    id = models.IntegerField(primary_key=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     date = models.DateField()
@@ -43,7 +45,7 @@ class Ballot(models.Model):
     for_votes = models.CharField()
     against_votes = models.CharField()
     abstention_votes = models.CharField()
-    applicants = models.JSONField()
+    applicants = models.JSONField(null=True, blank=True)
     an_url = models.CharField()
 
 
@@ -56,4 +58,7 @@ class Vote(models.Model):
     delegated = models.BooleanField(default=True)
 
     ballot = models.ForeignKey(Ballot, on_delete=models.CASCADE)
-    deputy = models.ForeignKey(Deputy, on_delete=models.CASCADE)
+    deputy = models.ForeignKey(Deputy, on_delete=models.CASCADE, null=True)
+
+    class Meta:
+        unique_together = ('ballot', 'deputy',)
