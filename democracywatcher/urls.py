@@ -7,4 +7,5 @@ from rest_framework import routers
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('democracywatcher.apps.tracker.urls'))
 ]

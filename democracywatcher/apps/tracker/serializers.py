@@ -2,28 +2,6 @@ from rest_framework import serializers
 from democracywatcher.apps.tracker.models import Deputy, Vote, Ballot
 
 
-class DeputySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Deputy
-        fields = [
-            'id', 'created_at', 'updated_at', 'slug', 'first_name', 'surname',
-            'gender', 'birthdate', 'birthplace', 'department_number', 'district',
-            'district_number', 'mandate_start_date', 'party_name', 'party_acronym',
-            'websites', 'email_addresses', 'addresses', 'associates', 'previous_mandates', 
-            'profession', 'twitter_name', 'url_an', 'id_an'
-        ]
-
-
-class BallotSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Ballot
-        fields = [
-            'id', 'created_at', 'updated_at', 'date', 'type', 'status', 'title',
-            'number_of_voters', 'for_votes', 'against_votes', 'abstention_votes',
-            'applicants', 'an_url'
-        ]
-
-
 class VoteUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Vote
@@ -42,9 +20,23 @@ class VoteSerializer(serializers.ModelSerializer):
         ]
 
 
-class DeputyVotesSerializer(DeputySerializer):
-    votes = VoteSerializer(many=True, read_only=True)
+class BallotSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Ballot
+        fields = [
+            'id', 'created_at', 'updated_at', 'date', 'type', 'status', 'title',
+            'number_of_voters', 'for_votes', 'against_votes', 'abstention_votes',
+            'applicants', 'an_url'
+        ]
 
-    class Meta(DeputySerializer.Meta):
-        fields = DeputySerializer.Meta.fields + ['votes']
 
+class DeputySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Deputy
+        fields = [
+            'id', 'created_at', 'updated_at', 'slug', 'first_name', 'surname',
+            'gender', 'birthdate', 'birthplace', 'department_number', 'district',
+            'district_number', 'mandate_start_date', 'party_name', 'party_acronym',
+            'websites', 'email_addresses', 'addresses', 'associates', 'previous_mandates', 
+            'profession', 'twitter_name', 'url_an', 'id_an'
+        ]
